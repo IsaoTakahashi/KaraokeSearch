@@ -1,1 +1,1 @@
-require_relative 'first'
+require_relative 'karaoke_song'

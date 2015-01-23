@@ -1,3 +1,7 @@
+require 'sinatra/activerecord'
+require 'sinatra/activerecord/rake'
+require './app.rb'
+
 require 'rspec/core/rake_task'
 desc "run spec"
 task :default => [:spec]

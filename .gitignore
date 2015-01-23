@@ -37,3 +37,6 @@ Gemfile.lock
 /.bundle
 /vendor/bundle/
 /vendor/ruby/
+
+# env
+.env

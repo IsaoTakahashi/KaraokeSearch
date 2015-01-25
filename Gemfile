@@ -6,6 +6,7 @@ gem 'activerecord-import'
 gem 'mysql2'
 gem 'sinatra'
 gem 'sinatra-reloader'
+gem 'sinatra-twitter-bootstrap'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 

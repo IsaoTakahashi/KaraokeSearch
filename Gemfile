@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 ruby '2.2.0'
 
 gem 'activerecord'
+gem 'activerecord-import'
 gem 'mysql2'
 gem 'sinatra'
 gem 'sinatra-reloader'

@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123132004) do
+ActiveRecord::Schema.define(version: 20150125051921) do
 
   create_table "karaoke_songs", force: :cascade do |t|
-    t.string   "song_id",     limit: 255
-    t.string   "artist_id",   limit: 255
-    t.string   "song_title",  limit: 255
-    t.string   "artist_name", limit: 255
+    t.string   "song_id",            limit: 255
+    t.string   "artist_id",          limit: 255
+    t.string   "song_title",         limit: 255
+    t.string   "artist_name",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "song_title_search",  limit: 255
+    t.string   "artist_name_search", limit: 255
   end
 
 end

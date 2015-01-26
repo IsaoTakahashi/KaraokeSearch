@@ -9,6 +9,7 @@ gem 'sinatra-reloader'
 gem 'sinatra-twitter-bootstrap'
 gem 'activerecord'
 gem 'sinatra-activerecord'
+gem 'therubyracer'
 
 gem 'sass'
 gem 'haml'

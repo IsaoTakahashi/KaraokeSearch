@@ -2,11 +2,11 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require 'haml'
 require 'sass'
-require 'coffee-script'
 require 'active_record'
 require 'activerecord-import'
 require 'json'
 
+require_relative 'config/environment'
 require_relative 'models/init'
 
 environment = ENV['RACK_ENV'].to_sym

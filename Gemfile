@@ -15,6 +15,7 @@ gem 'haml'
 gem 'coffee-script'
 gem 'shotgun'
 gem 'figaro'
+gem 'unicorn'
 
 group :test do
   gem 'rspec'

@@ -1,4 +1,7 @@
 $(function(){
+  $('th').fontFlex(25, 40, 70); 
+  $('td').fontFlex(25, 40, 70); 
+
   $('#search_button').click(function(){
     var artist = $('#artist').val();
     var title = $('#title').val();
@@ -7,7 +10,8 @@ $(function(){
       alert('アーティストかタイトルのどちらかを入力してください');
       return false;
     }
-    
+
+    $("#search_result").html('')
     $("#search_result").activity();
     var request = $.ajax({
       type: 'GET',
@@ -36,14 +40,17 @@ $(function(){
       return;
     }
 
+    th_font_size = $('#latest > table > thead > tr > th:first').css('font-size');
+    th_style = 'style="font-size: ' + th_font_size + ';"'
+
     result_tag = $('#search_result')
     result_tag.html('')
 
     result_table = $('<table class="table table-striped table-hover table-condensed"></table>');
-    result_table.append('<thead><tr><th class="text-center">Artist</th><th class="text-center">Title</th></tr></thead>');
+    result_table.append('<thead><tr><th class="text-center"' + th_style + '>Artist</th><th class="text-center"' + th_style + '>Title</th></tr></thead>');
     result_table_body = $('<tbody></tbody>');
     for(var i=0; i<len; i++) {
-      result_table_body.append('<tr><td class="text-center">' + json[i].artist_name +'</td><td class="text-center">'+ json[i].song_title + '</td></tr>');
+      result_table_body.append('<tr><td class="text-center"' + th_style + '>' + json[i].artist_name +'</td><td class="text-center"' + th_style + '>'+ json[i].song_title + '</td></tr>');
     }
 
     result_table.append(result_table_body);

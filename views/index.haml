@@ -1,63 +1,29 @@
-%h1 Karaoke Detail Search.
+%h1{:align => "center"} Karaoke Detail Search.
 
-%div#search_form.container
-  %div.row
-    %div.span3 アーティスト名: 
-    %input#artist{:name => "artist", :size => "40"}
-  %div.row
-    %div.span3 曲名: 
-    %input#title{:name => "title", :size => "100"}
-  %div.row
-  %input#search_button{:name => "search", :type => "submit", :value => "検索"}
-%hr
+%div#search_form
+  %div.form-group
+    %label{:for => "artist"} Artist
+    %input#artist.form-control.input-sm{:name => "artist",:placeholder => "Input Artist Name"}
+  %div.form-group
+    %label{:for => "title"} Song Title
+    %input#title.form-control.input-sm{:name => "title",:placeholder => "Input Song Title"}
+  %input#search_button.form-control.btn.btn-primary{:name => "search", :type => "submit", :value => "Search"}
+%div.col-xs-2
+
 %div#search_result.container
 %hr
-%h3 最近登録された曲
+%h3{:align => "center"} 最近登録された曲
 %div.container#latest
-  %div.row
-    %div.span3 アーティスト名
-    %div.span4 曲名
-  - @karaoke_songs.each do |karaoke|
-    %div.row
-      %div.span3 #{karaoke['artist_name']}
-      %div.span4 #{karaoke['song_title']}
-      %br
+  %table.table.table-striped.table-hover.table-condensed
+    %thead
+      %tr
+        %th.text-center アーティスト
+        %th.text-center タイトル
+    %tbody
+    - @karaoke_songs.each do |karaoke|
+      %tr
+        %th.text-center  #{karaoke['artist_name']}
+        %th.text-center  #{karaoke['song_title']}
+%div.col-sm-2
 %hr
-%div#record 登録曲数: #{@record_count}
-
-:javascript
-  $(function(){
-    $('#search_button').click(function(){
-      var artist = $('#artist').val();
-      var title = $('#title').val();
-
-      if((artist + title).length == 0) {
-        alert('アーティスト名か曲名のどちらかを入力してください');
-        return false;
-      }
-      
-      var request = $.ajax({
-        type: 'GET',
-        url: '/search',
-        dataType: 'json',
-        data: {
-          artist: artist,
-          title: title
-        }
-      }).done(function(json,status,xhr){
-        displayResult(json)
-      }).fail(function(jqxhr, status, error){
-        $('#search_result').html('<div>一件も見つかりませんでした。。。</div>');
-      });
-    });
-
-    function displayResult(json) {
-      len = json.length;
-      result_tag = $('#search_result')
-      result_tag.html("")
-      result_tag.append("<div class='row'><div class='span3'>アーティスト名</div><div class='span4'>曲名</div></div>")
-      for(var i=0; i<len; i++) {
-        result_tag.append("<div class='row'><div class='span3'>" + json[i].artist_name +"</div><div class='span4'>"+ json[i].song_title +"</div></div>")
-      }
-    }
-  });
+%p#record.col-xs-8.col-xs-offset-2 登録曲数: #{@record_count}

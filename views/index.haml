@@ -1,4 +1,4 @@
-%h1{:align => "center"} Karaoke Detail Search.
+%h1{:align => "center"} Karaoke Detail Search
 
 %div#search_form
   %div.form-group
@@ -10,20 +10,22 @@
   %input#search_button.form-control.btn.btn-primary{:name => "search", :type => "submit", :value => "Search"}
 %div.col-xs-2
 
-%div#search_result.container
+%hr
+
+%div#search_result
 %hr
 %h3{:align => "center"} 最近登録された曲
-%div.container#latest
+%div#latest
   %table.table.table-striped.table-hover.table-condensed
     %thead
       %tr
-        %th.text-center アーティスト
-        %th.text-center タイトル
+        %th.text-center Artist
+        %th.text-center Title
     %tbody
     - @karaoke_songs.each do |karaoke|
       %tr
-        %th.text-center  #{karaoke['artist_name']}
-        %th.text-center  #{karaoke['song_title']}
+        %td.text-center  #{karaoke['artist_name']}
+        %td.text-center  #{karaoke['song_title']}
 %div.col-sm-2
 %hr
 %p#record.col-xs-8.col-xs-offset-2 登録曲数: #{@record_count}

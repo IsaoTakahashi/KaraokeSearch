@@ -21,6 +21,7 @@ class Server < Sinatra::Base
     end
 
     get '/search' do
+    	limit_num = 2500
     	result_songs = []
     	artist = params['artist']
     	title = params['title']
@@ -28,11 +29,11 @@ class Server < Sinatra::Base
     		status 400
     		return
     	elsif title.blank? then
-    		result_songs = KaraokeSong.where('artist_name LIKE ?','%'+artist+'%').order('artist_name ASC, created_at DESC')
+    		result_songs = KaraokeSong.where('artist_name LIKE ?','%'+artist+'%').order('artist_name ASC, created_at DESC').limit(limit_num)
     	elsif artist.blank?
-    		result_songs = KaraokeSong.where('song_title LIKE ?','%'+title+'%').order('artist_name ASC, created_at DESC')
+    		result_songs = KaraokeSong.where('song_title LIKE ?','%'+title+'%').order('artist_name ASC, created_at DESC').limit(limit_num)
     	else
-    		result_songs = KaraokeSong.where('artist_name LIKE ?','%'+artist+'%').where('song_title LIKE ?','%'+title+'%').order('artist_name ASC, created_at DESC')
+    		result_songs = KaraokeSong.where('artist_name LIKE ?','%'+artist+'%').where('song_title LIKE ?','%'+title+'%').order('artist_name ASC, created_at DESC').limit(limit_num)
     	end
 
     	# if result_songs.blank? then

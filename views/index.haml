@@ -12,9 +12,11 @@
 
 %hr
 
+%div.pagination-holder
+  %div#light-pagination.pagination
 %div#search_result
 %hr
-%h3{:align => "center"} 最近登録された曲
+%h3#latest_label{:align => "center"} 最近登録された曲
 %div#latest
   %table.table.table-striped.table-hover.table-condensed
     %thead
@@ -26,6 +28,5 @@
       %tr
         %td.text-center  #{karaoke['artist_name']}
         %td.text-center  #{karaoke['song_title']}
-%div.col-sm-2
-%hr
-%p#record.col-xs-8.col-xs-offset-2 登録曲数: #{@record_count}
+
+%p#record 登録曲数: #{@record_count}

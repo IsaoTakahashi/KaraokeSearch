@@ -16,17 +16,15 @@
   %div#light-pagination.pagination
 %div#search_result
 %hr
-%h3#latest_label{:align => "center"} 最近登録された曲
+%h3#latest_label{:align => "center"} Recently Registered
+
 %div#latest
-  %table.table.table-striped.table-hover.table-condensed
-    %thead
-      %tr
-        %th.text-center Artist
-        %th.text-center Title
-    %tbody
-    - @karaoke_songs.each do |karaoke|
-      %tr
-        %td.text-center.sp-thtd  #{karaoke['artist_name']}
-        %td.text-center.sp-thtd  #{karaoke['song_title']}
+  %div.row
+    %div.text-center.col-xs-12.col-md-6.sp-artist  Artist
+    %div.text-center.col-xs-12.col-md-6.sp-song  Title
+  - @karaoke_songs.each do |karaoke|
+    %div.row
+      %div.text-center.col-xs-12.col-md-6.sp-artist  #{karaoke['artist_name']}
+      %div.text-center.col-xs-12.col-md-6.sp-song  #{karaoke['song_title']}
 
 %p#record 登録曲数: #{@record_count}

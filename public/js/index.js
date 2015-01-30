@@ -5,7 +5,7 @@ $(function(){
   function createPagination(pageCount) {
     $(".pagination").pagination({
         items: pageCount,
-        displayedPages: 3,
+        displayedPages: 1,
         cssStyle: 'light-theme',
         onPageClick: function(currentPageNumber){
             showPage(currentPageNumber);
@@ -50,7 +50,7 @@ $(function(){
   }
 
   function displayResult(json) {
-    itemOnPage = 20;
+    itemOnPage = 10;
     len = json.length;
 
     if (len < 1) {

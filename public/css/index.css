@@ -1,0 +1,12 @@
+/* customized setting*/
+@media (max-width: 768px) {
+  .light-theme a, .light-theme span {
+    font-size: 30px;
+  }
+  .sp {
+  	font-size: 45px
+  }
+  .sp-hide {
+  	display: none;
+  }
+} 

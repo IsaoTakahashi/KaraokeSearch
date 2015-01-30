@@ -1,10 +1,11 @@
 $(function(){
-  $('th').fontFlex(30, 60, 70); 
-  $('td').fontFlex(30, 60, 70);
+  // $('th').fontFlex(30, 60, 70); 
+  // $('td').fontFlex(30, 60, 70);
 
   function createPagination(pageCount) {
     $(".pagination").pagination({
         items: pageCount,
+        displayedPages: 3,
         cssStyle: 'light-theme',
         onPageClick: function(currentPageNumber){
             showPage(currentPageNumber);

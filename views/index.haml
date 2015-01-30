@@ -2,11 +2,11 @@
 
 %div#search_form
   %div.form-group
-    %label{:for => "artist"} Artist
-    %input#artist.form-control.input-sm{:name => "artist",:placeholder => "Input Artist Name"}
+    %label.sp-hide{:for => "artist"} Artist
+    %input#artist.form-control.input-lg{:name => "artist",:placeholder => "Input Artist Name"}
   %div.form-group
-    %label{:for => "title"} Song Title
-    %input#title.form-control.input-sm{:name => "title",:placeholder => "Input Song Title"}
+    %label.sp-hide{:for => "title"} Song Title
+    %input#title.form-control.input-lg{:name => "title",:placeholder => "Input Song Title"}
   %input#search_button.form-control.btn.btn-primary{:name => "search", :type => "submit", :value => "Search"}
 %div.col-xs-2
 
@@ -21,12 +21,12 @@
   %table.table.table-striped.table-hover.table-condensed
     %thead
       %tr
-        %th.text-center Artist
-        %th.text-center Title
+        %th.text-center.sp Artist
+        %th.text-center.sp Title
     %tbody
     - @karaoke_songs.each do |karaoke|
       %tr
-        %td.text-center  #{karaoke['artist_name']}
-        %td.text-center  #{karaoke['song_title']}
+        %td.text-center.sp  #{karaoke['artist_name']}
+        %td.text-center.sp  #{karaoke['song_title']}
 
 %p#record 登録曲数: #{@record_count}

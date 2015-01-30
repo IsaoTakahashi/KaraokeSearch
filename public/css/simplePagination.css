@@ -32,7 +32,7 @@ ul.simple-pagination {
 	Compact Theme Styles
 \*------------------------------------*/
 
-.compact-theme a, .compact-theme span {
+.compact-theme button, .compact-theme span {
 	float: left;
 	color: #333;
 	font-size:14px;
@@ -53,7 +53,7 @@ ul.simple-pagination {
 	background: linear-gradient(top, #ffffff 0%,#efefef 100%); /* W3C */
 }
 
-.compact-theme a:hover {
+.compact-theme button:hover {
 	text-decoration: none;
 	background: #efefef; /* Old browsers */
 	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); /* FF3.6+ */
@@ -94,7 +94,7 @@ ul.simple-pagination {
 	Light Theme Styles
 \*------------------------------------*/
 
-.light-theme a, .light-theme span {
+.light-theme button, .light-theme span {
 	float: left;
 	color: #666;
 	font-size:14px;
@@ -116,7 +116,7 @@ ul.simple-pagination {
 	background: linear-gradient(top, #ffffff 0%,#efefef 100%); /* W3C */
 }
 
-.light-theme a:hover {
+.light-theme button:hover {
 	text-decoration: none;
 	background: #FCFCFC;
 }
@@ -142,7 +142,7 @@ ul.simple-pagination {
 	Dark Theme Styles
 \*------------------------------------*/
 
-.dark-theme a, .dark-theme span {
+.dark-theme button, .dark-theme span {
 	float: left;
 	color: #CCC;
 	font-size:14px;
@@ -164,7 +164,7 @@ ul.simple-pagination {
 	background: linear-gradient(top, #555 0%,#333 100%); /* W3C */
 }
 
-.dark-theme a:hover {
+.dark-theme button:hover {
 	text-decoration: none;
 	background: #444;
 }

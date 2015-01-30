@@ -21,12 +21,12 @@
   %table.table.table-striped.table-hover.table-condensed
     %thead
       %tr
-        %th.text-center.sp Artist
-        %th.text-center.sp Title
+        %th.text-center Artist
+        %th.text-center Title
     %tbody
     - @karaoke_songs.each do |karaoke|
       %tr
-        %td.text-center.sp  #{karaoke['artist_name']}
-        %td.text-center.sp  #{karaoke['song_title']}
+        %td.text-center.sp-thtd  #{karaoke['artist_name']}
+        %td.text-center.sp-thtd  #{karaoke['song_title']}
 
 %p#record 登録曲数: #{@record_count}

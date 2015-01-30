@@ -2,11 +2,23 @@
 @media (max-width: 768px) {
   .light-theme a, .light-theme span {
     font-size: 30px;
+    line-height: 45px;
+    width: 45px;
+  }
+  .light-theme .prev {
+  	width: 75px;
+  }
+  .light-theme .next {
+  	width: 75px;
   }
   .sp {
-  	font-size: 45px
+  	font-size: 35px
   }
   .sp-hide {
   	display: none;
+  }
+  .sp-thtd {
+  	width: 100%;
+  	display: block;
   }
 } 

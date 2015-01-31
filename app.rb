@@ -8,6 +8,7 @@ require 'json'
 
 require_relative 'config/environment'
 require_relative 'models/init'
+require_relative 'lib/init'
 
 environment = ENV['RACK_ENV'].to_sym
 ActiveRecord::Base.configurations = YAML.load(ERB.new(File.read('config/database.yml')).result)
@@ -15,33 +16,34 @@ ActiveRecord::Base.establish_connection(environment)
 
 class Server < Sinatra::Base
     get '/' do
-    	@record_count = KaraokeSong.count
-    	@karaoke_songs = KaraokeSong.order('created_at desc').limit(10)
+        @record_count = KaraokeSong.count
+        @karaoke_songs = KaraokeSong.order('created_at desc').limit(10)
         haml :index
     end
 
     get '/search' do
-    	limit_num = 2500
-    	result_songs = []
-    	artist = params['artist']
-    	title = params['title']
-    	if artist.blank? && title.blank? then
-    		status 400
-    		return
-    	elsif title.blank? then
-    		result_songs = KaraokeSong.where('artist_name LIKE ?','%'+artist+'%').order('artist_name ASC, created_at DESC').limit(limit_num)
-    	elsif artist.blank?
-    		result_songs = KaraokeSong.where('song_title LIKE ?','%'+title+'%').order('artist_name ASC, created_at DESC').limit(limit_num)
-    	else
-    		result_songs = KaraokeSong.where('artist_name LIKE ?','%'+artist+'%').where('song_title LIKE ?','%'+title+'%').order('artist_name ASC, created_at DESC').limit(limit_num)
-    	end
+        limit_num = 2500
+        result_songs = []
+        artist = SearchStringUtil.create_search_string(params['artist'])
+        title = SearchStringUtil.create_search_string(params['title'])
 
-    	# if result_songs.blank? then
-    	# 	status 404
-    	# 	return
-    	# end
+        if artist.blank? && title.blank? then
+            status 400
+            return
+        elsif title.blank? then
+            result_songs = KaraokeSong.where('artist_name_search LIKE ?','%'+artist+'%').order('artist_name_search ASC, song_title_search ASC, created_at DESC').limit(limit_num)
+        elsif artist.blank?
+            result_songs = KaraokeSong.where('song_title_search LIKE ?','%'+title+'%').order('artist_name_search ASC, song_title_search ASC, created_at DESC').limit(limit_num)
+        else
+            result_songs = KaraokeSong.where('artist_name_search LIKE ?','%'+artist+'%').where('song_title_search LIKE ?','%'+title+'%').order('artist_name_search ASC, song_title_search ASC, created_at DESC').limit(limit_num)
+        end
 
-    	result_songs.to_json(:root => false)
+        # if result_songs.blank? then
+        # 	status 404
+        # 	return
+        # end
+
+        result_songs.to_json(:root => false)
     end
 
     get '/karaokes.json' do
@@ -52,8 +54,8 @@ class Server < Sinatra::Base
         order = (params['order'] || "desc").upcase
 
         unless order == "ASC" || order == "DESC" then
-        	status 400
-        	return 'invalid parameter'
+            status 400
+            return 'invalid parameter'
         end
 
         start_idx = hits * (page.to_i-1)
@@ -97,11 +99,11 @@ class Server < Sinatra::Base
 
             karaoke_song =  KaraokeSong.find_by_song_id(karaoke.song_id)
             if karaoke_song then
-            	next
+                next
                 #status 409
                 #return
             end
-            
+
             requested_songs << karaoke
         end
 
@@ -112,6 +114,28 @@ class Server < Sinatra::Base
 
         status 202
         requested_songs.to_json
+    end
+
+    get '/karaoke/search/refresh' do
+
+        begin
+            columns = [:id, :song_title_search, :artist_name_search]
+            KaraokeSong.all.find_in_batches(:batch_size => 1000) do |songs|
+                songs.each do |song|
+                    song.song_title_search = SearchStringUtil.create_search_string(song.song_title)
+                    song.artist_name_search = SearchStringUtil.create_search_string(song.artist_name)
+                end
+                values = songs.map {|song| [song.id, song.song_title_search, song.artist_name_search]}
+                KaraokeSong.import columns, values, :on_duplicate_key_update => [:song_title_search,:artist_name_search], :validate => false
+            end
+        rescue Exception => e
+            p e
+            status 500
+            return
+        end
+
+        status 202
+        "success"
     end
 
     delete '/karaoke/:id' do |id|

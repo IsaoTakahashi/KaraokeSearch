@@ -28,8 +28,12 @@ $(function(){
       return false;
     }
 
-    $("#search_result").html('')
-    $("#search_result").activity();
+    $('.pagination:first').html('');
+    $('#search_result').html('');
+    $('#search_result').activity({
+      width: 30,
+      length: 40
+    });
     var request = $.ajax({
       type: 'GET',
       url: '/search',
@@ -46,7 +50,7 @@ $(function(){
   });
 
   function displayNoResult() {
-    $('#search_result').html('<div class="alert alert-warning">一件も見つかりませんでした。。。</div>');
+    $('#search_result').html('<div class="alert alert-warning sp-alert">一件も見つかりませんでした。。。</div>');
   }
 
   function displayResult(json) {
@@ -69,13 +73,6 @@ $(function(){
 
     classForElement = 'text-center col-xs-12 col-md-6'
 
-    // create header
-    // resultHeaderArtist = $('<div class="' + classForElement + ' sp-artist">Artist</div>');
-    // resultHeaderTitle = $('<div class="' + classForElement + ' sp-title">Title</div>');
-    // resultHeader = $('<div class="row"></div>');
-    // resultHeader.append(resultHeaderArtist).append(resultHeaderTitle);
-    // resultTag.append(resultHeader);
-
     for(var i=0; i<len; i++) {
       if (i % itemOnPage == 0) {
         page = $('<div id="page-' + ((i/itemOnPage)+1) + '" class ="selection"></div>');
@@ -85,21 +82,6 @@ $(function(){
       titleElement = $('<div class="' + classForElement + ' sp-title">' + json[i].song_title + '</div>');
       page.append(artistElement).append(titleElement);
    }
-
-    // // create list
-    // result_table = $('<table class="table table-striped table-hover table-condensed"></table>');
-    // result_table.append('<thead><tr><th class="text-center"' + th_style + '>Artist</th><th class="text-center"' + th_style + '>Title</th></tr></thead>');
-    
-    // result_table_body = $('<tbody id="page-1" class ="selection"></tbody>');
-    // for(var i=0; i<len; i++) {
-    //   if (i % itemOnPage == 0) {
-    //     result_table_body = $('<tbody id="page-' + ((i/itemOnPage)+1) + '" class ="selection"></tbody>');
-    //     result_table.append(result_table_body);
-    //   }
-    //   result_table_body.append('<tr><td class="text-center"' + th_style + '>' + json[i].artist_name +'</td><td class="text-center"' + th_style + '>'+ json[i].song_title + '</td></tr>');
-    // }
-
-    // resultTag.append(result_table);
 
     $('.selection').hide();
     $('#page-1').show();

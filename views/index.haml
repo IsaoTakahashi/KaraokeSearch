@@ -1,1 +1,30 @@
-%h1 This is the application root.
+%h1{:align => "center"} Karaoke Detail Search
+
+%div#search_form
+  %div.form-group
+    %label.sp-hide{:for => "artist"} Artist
+    %input#artist.form-control.input-lg{:name => "artist",:placeholder => "Input Artist Name"}
+  %div.form-group
+    %label.sp-hide{:for => "title"} Song Title
+    %input#title.form-control.input-lg{:name => "title",:placeholder => "Input Song Title"}
+  %input#search_button.form-control.btn.btn-primary{:name => "search", :type => "submit", :value => "Search"}
+%div.col-xs-2
+
+%hr
+
+%div.pagination-holder
+  %div#light-pagination.pagination
+%div#search_result
+%hr
+%h3#latest_label{:align => "center"} Recently Registered
+
+%div#latest
+  %div.row
+    %div.text-center.col-xs-12.col-md-6.sp-artist  Artist
+    %div.text-center.col-xs-12.col-md-6.sp-title  Title
+  - @karaoke_songs.each do |karaoke|
+    %div.row
+      %div.text-center.col-xs-12.col-md-6.sp-artist  #{karaoke['artist_name']}
+      %div.text-center.col-xs-12.col-md-6.sp-title  #{karaoke['song_title']}
+
+%p#record 登録曲数: #{@record_count}
